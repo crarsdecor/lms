@@ -1,0 +1,30 @@
+const express = require("express");
+const getAllAppointment = require("../controller/getAllAppointment");
+const getAllUsers = require("../controller/getAllUsers");
+const { route } = require("./LoginRoute");
+const createNewCourse = require("../controller/createNewCourse");
+const getAllCourses = require("../controller/getAllCourses");
+const addSevFivVideo = require("../controller/addSevFivVideo");
+const getSevFivVideos = require("../controller/getSevFivVideos");
+const editSevFivVideo = require("../controller/editSevFivVideo");
+const deleteSevFivVideo = require("../controller/deleteSevFivVideo");
+const AddCourseVideo = require("../controller/AddCourseVideo");
+const getAllCourseVideo = require("../controller/getAllCourseVideo");
+const editCourseVideo = require("../controller/editCourseVideo");
+const deleteCourseVideo = require("../controller/deleteCourseVideo");
+const router = express.Router();
+
+router.get("/getAllUser", getAllUsers);
+router.get("/getallappointments", getAllAppointment);
+router.get("/getAllCourses", getAllCourses);
+router.get("/getVideos", getSevFivVideos);
+router.get("/getCourseVideos", getAllCourseVideo);
+router.put("/updateCourseVideo/:id", editCourseVideo);
+router.put("/updateVideo/:id", editSevFivVideo);
+router.post("/addCourseVideo", AddCourseVideo);
+router.post("/createCourse", createNewCourse);
+router.post("/addVideo", addSevFivVideo);
+router.delete("/deleteVideo/:id", deleteSevFivVideo);
+router.delete("/deleteCourseVideo/:id",deleteCourseVideo);
+
+module.exports = router;
