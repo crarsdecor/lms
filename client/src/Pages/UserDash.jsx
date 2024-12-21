@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Typography, message, Card, Col, Row, Skeleton } from "antd";
+import {
+  Layout,
+  Typography,
+  message,
+  Card,
+  Col,
+  Row,
+  Skeleton,
+  Progress,
+} from "antd";
 import UserLayout from "../Layouts/UserLayout";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const { Text } = Typography;
 const { Content } = Layout;
@@ -12,6 +22,10 @@ const { Content } = Layout;
 const UserDash = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [amazonVideo, setAmazonVideo] = useState([]);
+  console.log("amazon ", amazonVideo);
+  const [websiteVideo, setWebsiteVideo] = useState([]);
+  console.log("website", websiteVideo);
   const [amazon, setAmazon] = useState(null);
   const [website, setWebsite] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,6 +41,49 @@ const UserDash = () => {
       setLoading(false);
       return;
     }
+
+    const fetchAmazonVideo = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          message.error("Authentication token missing.");
+          return;
+        }
+
+        const response = await axios.get(`${backendUrl}/user/getAmazonVideo`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setAmazonVideo(response.data.videos);
+      } catch (error) {
+        message.error("Failed to fetch courses. Please try again.");
+      }
+    };
+    fetchAmazonVideo();
+
+    const fetchWebsiteVideo = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          message.error("Authentication token missing.");
+          return;
+        }
+
+        const response = await axios.get(`${backendUrl}/user/getWebsiteVideo`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setWebsiteVideo(response.data.videos);
+      } catch (error) {
+        message.error("Failed to fetch courses. Please try again.");
+      }
+    };
+
+    fetchWebsiteVideo();
 
     const fetchAmazon = async () => {
       try {
@@ -110,6 +167,37 @@ const UserDash = () => {
     }
   };
 
+  const calculateAmazonProgress = () => {
+    const userName = localStorage.getItem("name");
+    if (!userName || !amazonVideo.length) return 0;
+
+    // Count completed videos where the user's name exists in the 'users' array
+    const completedVideos = amazonVideo.filter((video) =>
+      video.users.some((user) => user.name === userName)
+    ).length;
+
+    // Total video count
+    const totalVideos = amazonVideo.length;
+
+    // Calculate and return progress as a percentage
+    return Math.round((completedVideos / totalVideos) * 100);
+  };
+  const calculateWebsiteProgress = () => {
+    const userName = localStorage.getItem("name");
+    if (!userName || !websiteVideo.length) return 0;
+
+    // Count completed videos where the user's name exists in the 'users' array
+    const completedVideos = websiteVideo.filter((video) =>
+      video.users.some((user) => user.name === userName)
+    ).length;
+
+    // Total video count
+    const totalVideos = websiteVideo.length;
+
+    // Calculate and return progress as a percentage
+    return Math.round((completedVideos / totalVideos) * 100);
+  };
+
   if (loading) {
     return (
       <UserLayout>
@@ -147,7 +235,6 @@ const UserDash = () => {
   return (
     <UserLayout>
       <div className="p-4 space-y-6">
-        {/* Combined Amazon and Website Courses Section in a single Row */}
         <Row gutter={[16, 16]} justify="center">
           {/* Amazon Courses Section */}
           {amazon &&
@@ -178,6 +265,14 @@ const UserDash = () => {
                       <li>{course.bullet3}</li>
                       <li>{course.bullet4}</li>
                     </ul>
+                  </div>
+                  {/* Progress Bar */}
+                  <div className="mt-4">
+                    <Progress
+                      percent={calculateAmazonProgress(course)}
+                      size="small"
+                      status="active"
+                    />
                   </div>
                 </Card>
               </Col>
@@ -212,6 +307,14 @@ const UserDash = () => {
                       <li>{course.bullet3}</li>
                       <li>{course.bullet4}</li>
                     </ul>
+                  </div>
+                  {/* Progress Bar */}
+                  <div className="mt-4">
+                    <Progress
+                      percent={calculateWebsiteProgress(course)}
+                      size="small"
+                      status="active"
+                    />
                   </div>
                 </Card>
               </Col>
