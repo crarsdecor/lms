@@ -37,7 +37,7 @@ const Footer = () => {
           <TwitterOutlined />
         </a>
         <a
-          href="https://www.instagram.com/crarts_decor/"
+          href="https://www.instagram.com/saumic_craft_/"
           target="Crars_Decor"
           rel="noopener noreferrer"
           className="text-black text-xl hover:text-red-800"
@@ -46,7 +46,7 @@ const Footer = () => {
           <InstagramOutlined />
         </a>
         <a
-          href="https://linkedin.com"
+          href="https://www.linkedin.com/company/saumiccraft/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-black text-xl hover:text-blue-700"

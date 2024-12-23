@@ -89,22 +89,16 @@ const Navbar = ({ toggleSidebar }) => {
         >
           About Us
         </button>
-        <button
-          onClick={() => navigate("/contactus")}
-          className="text-gray-800 hover:text-blue-600"
-        >
-          Contact Us
-        </button>
       </nav>
       {/* Raise Ticket Button (Login for non-authenticated users) */}
       <div>
-        <Button
+        {/* <Button
           onClick={handleRaiseTicketClick}
           type="primary"
           className="bg-gradient-to-r from-blue-800 to-blue-400 hover:from-blue-700 hover:to-blue-500 font-bold shadow-lg hover:shadow-xl"
         >
           {token ? "Raise Ticket" : "Login"}
-        </Button>
+        </Button> */}
       </div>
     </header>
   );

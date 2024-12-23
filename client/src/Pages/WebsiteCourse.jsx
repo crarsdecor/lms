@@ -22,6 +22,7 @@ const WebsiteCourse = () => {
   const [videos, setVideos] = useState([]);
   const [begginer, setBegginer] = useState([]);
   const [intermediate, setIntermediate] = useState([]);
+  const [websiteVideo, setWebsiteVideo] = useState([]);
   const [advance, setAdvance] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null); // State for selected video
@@ -51,6 +52,22 @@ const WebsiteCourse = () => {
   const isVideoCompleted = (video) => {
     const currentUserName = localStorage.getItem("name");
     return video.users?.some((user) => user.name === currentUserName);
+  };
+
+  const calculateWebsiteProgress = () => {
+    const userName = localStorage.getItem("name");
+    if (!userName || !websiteVideo.length) return 0;
+
+    // Count completed videos where the user's name exists in the 'users' array
+    const completedVideos = websiteVideo.filter((video) =>
+      video.users.some((user) => user.name === userName)
+    ).length;
+
+    // Total video count
+    const totalVideos = websiteVideo.length;
+
+    // Calculate and return progress as a percentage
+    return Math.round((completedVideos / totalVideos) * 100);
   };
 
   const fetchVideos = async () => {
@@ -205,7 +222,28 @@ const WebsiteCourse = () => {
     }
   };
 
+  const fetchWebsiteVideo = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        message.error("Authentication token missing.");
+        return;
+      }
+
+      const response = await axios.get(`${backendUrl}/user/getWebsiteVideo`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setWebsiteVideo(response.data.videos);
+    } catch (error) {
+      message.error("Failed to fetch courses. Please try again.");
+    }
+  };
+
   useEffect(() => {
+    fetchWebsiteVideo();
     fetchAdvanceVideos();
     fetchIntermediateVideos();
     fetchBegginerVideos();
@@ -278,7 +316,7 @@ const WebsiteCourse = () => {
                     <div className="mt-4">
                       <Text>Course Progress:</Text>
                       <Progress
-                        percent={calculateProgress(course._id)}
+                        percent={calculateWebsiteProgress(course)}
                         status="active"
                         className="mt-2"
                       />

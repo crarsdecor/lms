@@ -25,7 +25,7 @@ const testimonials = [
 const TestimonialsSection = () => (
   <>
     <UserNavbar />
-    <h1 className="text-3xl font-extrabold mb-4 text-center text-blue-500">
+    <h1 className="text-3xl mt-24 font-extrabold mb-4 text-center text-blue-500">
       What Our Student Says
     </h1>
 

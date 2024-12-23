@@ -18,6 +18,8 @@ import Testimonial from "./Pages/Testimonial";
 import AboutUs from "./Pages/AboutUs";
 import ContactUs from "./Pages/ContactUs";
 import SevFivTraining from "./Pages/SevFivTraining";
+import LiveTraining from "./Pages/LiveTraining";
+import LiveTraningAdmin from "./Pages/LiveTraningAdmin";
 function App() {
   return (
     <>
@@ -36,6 +38,7 @@ function App() {
             <Route path="/ebook" exact element={<EBook />} />
             <Route path="/regular-update" exact element={<RegularUpdate />} />
             <Route path="/75daystraining" exact element={<SevFivTraining />} />
+            <Route path="/live-training" exact element={<LiveTraining />} />
             <Route
               path="/social-media-content"
               exact
@@ -47,6 +50,7 @@ function App() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/75videos" element={<SevFivVideos />} />
             <Route path="/videos" element={<Videos />} />
+            <Route path="/livetraining" element={<LiveTraningAdmin />} />
           </Route>
         </Routes>
       </Router>

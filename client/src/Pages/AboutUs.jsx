@@ -1,24 +1,32 @@
 import React from "react";
 import UserNavbar from "../Components/UserNavbar";
+import UserLayout from "../Layouts/UserLayout";
 
 const AboutUs = () => {
   return (
-    <>
-      <UserNavbar />
-      <div className="mt-28 p-4">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos enim qui
-        est praesentium error officia saepe sapiente in aut, excepturi vitae,
-        similique perferendis repellendus autem tenetur voluptate amet quo illo
-        iure natus ex minus? Ipsum pariatur ullam dolore tempora vel minima
-        facere ducimus magnam quidem asperiores rem facilis corporis debitis
-        reiciendis, accusamus, quam beatae inventore molestiae vero? Veniam
-        dolorum molestias voluptatibus, laudantium minima libero, suscipit in
-        ducimus doloribus id, quaerat ipsam aperiam reprehenderit illum
-        perferendis quae neque laboriosam quas optio voluptas omnis rem est
-        culpa. Sequi asperiores delectus illo similique maiores consequatur!
-        Laudantium enim impedit voluptatem quam numquam suscipit ullam!
+    <UserLayout>
+      <div className="p-4">
+        <h1 className="text-xl font-bold mb-4">Who Are We</h1>
+        <p className="mb-4">
+          We are a handicrafts manufacturing company based in Jaipur, Rajasthan.
+          Our brand,
+          <strong> Saumic Craft</strong>, is a best-seller brand on Amazon with
+          a turnover of
+          <strong> ₹10 crore</strong>. We have over{" "}
+          <strong>85,000+ SKUs</strong>. We are bulk exporters of our handicraft
+          products and also provide products to our enrolled sellers with
+          <strong> no MOQ (Minimum Order Quantity)</strong> policies. Saumic
+          Craft is a trademark-registered company under the Government of India
+          Trademark Act, 1999.
+        </p>{" "}
+        <p className="mb-4">
+          <strong>CROWN MART / Saumic Craft</strong>
+          <br />
+          Plot No.-18, Shankar Vihar-E, Sanganer, Sawai Getor, Jagatpura,
+          Jaipur, Jaipur, Rajasthan, 302017
+        </p>
       </div>
-    </>
+    </UserLayout>
   );
 };
 

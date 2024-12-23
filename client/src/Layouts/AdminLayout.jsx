@@ -33,6 +33,7 @@ const AdminLayout = ({ children }) => {
     else if (path.includes("/courses")) setActiveLink("courses");
     else if (path.includes("/75videos")) setActiveLink("75videos");
     else if (path.includes("/videos")) setActiveLink("videos");
+    else if (path.includes("/livetraining")) setActiveLink("live-training");
   }, [location]); // Run this effect whenever the location changes
 
   return (
@@ -61,6 +62,11 @@ const AdminLayout = ({ children }) => {
               name: "Videos",
               icon: <EventIcon />,
               path: "/videos",
+            },
+            {
+              name: "Live-Training",
+              icon: <EventIcon />,
+              path: "/livetraining",
             },
             {
               name: "Logout",

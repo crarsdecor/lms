@@ -145,6 +145,18 @@ const UserNavbar = () => {
               </button>
             )}
           </li>
+          <li>
+            {token ? (
+              <button
+                onClick={() => navigate("/live-training")}
+                className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"
+              >
+                Live Training
+              </button>
+            ) : (
+              <button className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"></button>
+            )}
+          </li>
         </ul>
       </nav>
 

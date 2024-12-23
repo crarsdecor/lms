@@ -19,6 +19,8 @@ const { Panel } = Collapse;
 
 const AmazonCourse = () => {
   const [amazon, setAmazon] = useState(null);
+  const [amazonVideo, setAmazonVideo] = useState([]);
+
   const [videos, setVideos] = useState([]);
   const [begginer, setBegginer] = useState([]);
   const [intermediate, setIntermediate] = useState([]);
@@ -205,7 +207,28 @@ const AmazonCourse = () => {
     }
   };
 
+  const fetchAmazonVideo = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        message.error("Authentication token missing.");
+        return;
+      }
+
+      const response = await axios.get(`${backendUrl}/user/getAmazonVideo`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setAmazonVideo(response.data.videos);
+    } catch (error) {
+      message.error("Failed to fetch courses. Please try again.");
+    }
+  };
+
   useEffect(() => {
+    fetchAmazonVideo();
     fetchAdvanceVideos();
     fetchIntermediateVideos();
     fetchBegginerVideos();
@@ -227,21 +250,20 @@ const AmazonCourse = () => {
     setViewMode(true);
   };
 
-  const calculateProgress = (courseId) => {
-    const name = localStorage.getItem("name"); // Get the logged-in user's name
-    const courseVideos = videos.filter((video) => video.courseId === courseId); // Filter videos by course ID
+  const calculateAmazonProgress = () => {
+    const userName = localStorage.getItem("name");
+    if (!userName || !amazonVideo.length) return 0;
 
-    // Count how many videos have the user's name in the users array (completed by this user)
-    const completedVideosCount = courseVideos.filter((video) =>
-      video.users.some((user) => user.name === name)
+    // Count completed videos where the user's name exists in the 'users' array
+    const completedVideos = amazonVideo.filter((video) =>
+      video.users.some((user) => user.name === userName)
     ).length;
 
-    const totalVideos = courseVideos.length;
+    // Total video count
+    const totalVideos = amazonVideo.length;
 
-    // Return progress percentage
-    return totalVideos > 0
-      ? Math.round((completedVideosCount / totalVideos) * 100)
-      : 0;
+    // Calculate and return progress as a percentage
+    return Math.round((completedVideos / totalVideos) * 100);
   };
 
   return (
@@ -283,7 +305,7 @@ const AmazonCourse = () => {
                     <div className="mt-4">
                       <Text>Course Progress:</Text>
                       <Progress
-                        percent={calculateProgress(course._id)}
+                        percent={calculateAmazonProgress(course)}
                         status="active"
                         className="mt-2"
                       />
