@@ -11,7 +11,7 @@ const adminRoute = require("./route/adminRoute");
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8800;
 
 // Middleware
 app.use(

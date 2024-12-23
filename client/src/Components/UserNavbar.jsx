@@ -46,13 +46,23 @@ const UserNavbar = () => {
         />
         {/* Raise Ticket / Login Button (Visible only on mobile) */}
         <div className="lg:hidden">
-          <Button
-            onClick={handleRaiseTicketClick}
-            type="primary"
-            className="bg-gradient-to-r from-blue-800 to-blue-400 hover:from-blue-700 hover:to-blue-500 font-bold shadow-lg hover:shadow-xl ml-4"
-          >
-            {token ? "Raise Ticket" : "Login"}
-          </Button>
+          {token ? (
+            <Button
+              onClick={handleLogoutClick}
+              type="primary"
+              className="bg-gradient-to-r from-red-800 to-red-400 hover:from-red-700 hover:to-red-500 font-bold shadow-lg hover:shadow-xl"
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              onClick={handleRaiseTicketClick}
+              type="primary"
+              className="bg-gradient-to-r from-blue-800 to-blue-400 hover:from-blue-700 hover:to-blue-500 font-bold shadow-lg hover:shadow-xl ml-4"
+            >
+              Login
+            </Button>
+          )}
         </div>
       </div>
 
