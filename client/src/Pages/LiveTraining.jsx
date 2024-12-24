@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Drawer, message } from "antd";
+import { Card, Button, message, Radio, Space } from "antd";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserLayout from "../Layouts/UserLayout";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const LiveTraining = () => {
   const [prevVideos, setPrevVideos] = useState([]);
   const [trainings, setTrainings] = useState([]);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("previous");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Initialize AOS
+    AOS.init({
+      duration: 800, // Animation duration in ms
+      once: true, // Animation happens only once
+    });
+  }, []);
 
   const fetchVideos = async () => {
     try {
       const response = await axios.get(`${backendUrl}/admin/getprevvideo`);
       setPrevVideos(response.data.videos);
     } catch (error) {
-      message.error("Failed to fetch videos.");
+      message.error("Failed to fetch previous videos.");
     }
   };
 
@@ -36,163 +47,96 @@ const LiveTraining = () => {
     fetchTrainings();
   }, []);
 
-  const handleVideoClick = (link) => {
-    setSelectedVideo(link);
-    setDrawerVisible(false); // Close drawer on mobile when video is selected
-  };
-
-  const handleVideoClose = () => {
-    setSelectedVideo(null); // Close video and show upcoming trainings again
+  const handlePlayVideo = (video) => {
+    navigate(`/video-player`, { state: { video } });
   };
 
   return (
     <UserLayout>
-      <div className="flex flex-col md:flex-row h-screen">
-        {/* Main Content */}
-        <div
-          className={`${
-            selectedVideo ? "md:w-3/4" : "md:w-full"
-          } flex-grow bg-gray-100 flex items-center justify-center transition-all duration-300`}
+      <div className="p-4">
+        {/* Radio Buttons for Switching Views */}
+        <Radio.Group
+          value={selectedTab}
+          onChange={(e) => setSelectedTab(e.target.value)}
+          className="mb-6"
         >
-          {selectedVideo ? (
-            <div className="w-full h-full p-4">
-              <iframe
-                width="100%"
-                height="100%"
-                src={selectedVideo}
-                title="Video Player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="rounded-lg shadow-lg"
-              ></iframe>
-              <Button
-                type="default"
-                className="mt-4"
-                onClick={handleVideoClose}
-              >
-                Close Video
-              </Button>
-            </div>
-          ) : (
-            <div className="pl-4 w-full">
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-red-500 to-blue-500 bg-clip-text text-transparent mb-6">
-                Upcoming Trainings
-              </h2>
+          <Radio.Button value="previous">Previous Trainings</Radio.Button>
+          <Radio.Button value="upcoming">Upcoming Trainings</Radio.Button>
+        </Radio.Group>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {trainings.map((training) => (
-                  <Card
-                    key={training._id}
-                    bordered={false}
-                    hoverable
-                    className="w-full transform transition-all duration-300 hover:scale-105 shadow-lg rounded-lg"
-                  >
-                    {/* Cover Image */}
-                    <img
-                      alt={training.topic}
-                      src="https://thumbs.dreamstime.com/b/upcoming-banner-template-ribbon-label-sign-sticker-195330724.jpg"
-                      className="object-cover h-40 w-full rounded-t-lg"
-                    />
-
-                    {/* Card Content */}
-                    <div className="p-4">
-                      {/* Topic */}
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                        {training.topic}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-gray-600 mb-4">
-                        {training.description}
-                      </p>
-
-                      {/* Date */}
-                      <p className="text-sm text-gray-500">
-                        Date:{" "}
-                        {training.date
-                          ? new Date(training.date).toLocaleDateString("en-GB") // Formats to dd/mm/yyyy
-                          : "TBA"}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        Time: {training.time || "TBA"}
-                      </p>
-
-                      {/* Join Button */}
-                      <Button
-                        type="primary"
-                        href={training.link}
-                        target="_blank"
-                        block
-                        className="mt-4 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"
-                      >
-                        Join Now
-                      </Button>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Previous Video List */}
-        <div
-          className={`${
-            selectedVideo ? "md:w-1/4" : "hidden md:block"
-          } bg-gray-100 p-4 overflow-auto transition-all duration-300`}
-        >
-          <h2 className="text-lg font-semibold bg-gradient-to-r from-red-500 to-blue-500 bg-clip-text text-transparent mb-4">
-            Previous Trainings
-          </h2>
-          <ul className="space-y-6">
-            {prevVideos.map((video) => (
-              <li
+        {/* Cards Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {selectedTab === "previous" &&
+            prevVideos.map((video, index) => (
+              <Card
                 key={video._id}
-                className="cursor-pointer text-lg text-blue-600 hover:text-blue-800 transition-all duration-300"
-                onClick={() => handleVideoClick(video.link)}
+                hoverable
+                className="shadow-lg rounded-lg border border-gray-200 bg-white"
+                cover={
+                  <img
+                    alt={video.topic}
+                    src="https://via.placeholder.com/400"
+                    className="h-40 object-cover w-full rounded-t-lg"
+                  />
+                }
+                data-aos="fade-up"
+                data-aos-delay={`${index * 100}`} // Adding delay for staggered animation
               >
-                <div className="p-4 bg-white shadow-md rounded-lg hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-800 mb-2">
                   {video.topic}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Drawer for Mobile View */}
-        <Drawer
-          title="Previous Trainings"
-          placement="right"
-          onClose={() => setDrawerVisible(false)}
-          visible={drawerVisible}
-          bodyStyle={{ padding: 0 }}
-        >
-          <div className="p-4">
-            <ul className="space-y-6">
-              {prevVideos.map((video) => (
-                <li
-                  key={video._id}
-                  className="cursor-pointer text-xl text-blue-600 hover:text-blue-800 transition-all duration-300"
-                  onClick={() => handleVideoClick(video.link)}
+                </h3>
+                <Button
+                  type="primary"
+                  block
+                  onClick={() => handlePlayVideo(video.link)}
+                  className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600"
                 >
-                  <div className="p-4 bg-white shadow-md rounded-lg hover:shadow-xl transition-all duration-300">
-                    {video.topic}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Drawer>
+                  Play Now
+                </Button>
+              </Card>
+            ))}
 
-        {/* Mobile Menu Button */}
-        <Button
-          className="fixed top-4 right-4 md:hidden z-50"
-          type="primary"
-          onClick={() => setDrawerVisible(!drawerVisible)}
-        >
-          Menu
-        </Button>
+          {selectedTab === "upcoming" &&
+            trainings.map((training, index) => (
+              <Card
+                key={training._id}
+                hoverable
+                className="shadow-lg rounded-lg border border-gray-200 bg-white"
+                cover={
+                  <img
+                    alt={training.topic}
+                    src="https://thumbs.dreamstime.com/b/upcoming-banner-template-ribbon-label-sign-sticker-195330724.jpg"
+                    className="h-40 object-cover w-full rounded-t-lg"
+                  />
+                }
+                data-aos="fade-up"
+                data-aos-delay={`${index * 100}`} // Adding delay for staggered animation
+              >
+                <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  {training.topic}
+                </h3>
+                <p className="text-gray-600 mb-4">{training.description}</p>
+                <p className="text-sm text-gray-500 mb-2">
+                  Date:{" "}
+                  {training.date
+                    ? new Date(training.date).toLocaleDateString("en-GB")
+                    : "TBA"}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Time: {training.time || "TBA"}
+                </p>
+                <Button
+                  type="primary"
+                  href={training.link}
+                  target="_blank"
+                  block
+                  className="bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"
+                >
+                  Join Now
+                </Button>
+              </Card>
+            ))}
+        </div>
       </div>
     </UserLayout>
   );

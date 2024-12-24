@@ -42,18 +42,29 @@ const Home = () => {
       {/* <Navbar /> */}
       <UserNavbar />
       <div
-        className="flex flex-col lg:flex-row items-center justify-between p-4 mb-10"
-        // style={{
-        //   backgroundImage: "url('/banner.png')", // Background image URL
-        //   backgroundSize: "cover", // Cover the entire container
-        //   backgroundPosition: "center", // Center the image
-        //   backgroundRepeat: "no-repeat", // Prevent the image from repeating
-        //   height: "100vh", // Make the height fill the entire viewport height
-        //   width: "100%", // Make the width fill the entire viewport width
-        //   marginTop: "110px",
-        // }}
+        className="flex flex-col lg:flex-row items-center justify-between mb-10"
+        style={{
+          backgroundImage: "url('/banner9.jpg')", // Background image URL
+          backgroundSize: "cover", // Cover the entire container
+          backgroundPosition: "center", // Center the image
+          backgroundRepeat: "no-repeat", // Prevent the image from repeating
+          height: "90vh", // Make the height fill the entire viewport height
+          width: "100%", // Make the width fill the entire viewport width
+          marginTop: "60px",
+        }}
       >
-        <div data-aos="zoom-in" className="w-full lg:w-1/2 mt-20">
+        <div className="relative top-32 left-6">
+          <Button
+            onClick={() => {
+              navigate("/login");
+            }}
+            className="font-bold"
+            type="primary"
+          >
+            Start Now
+          </Button>
+        </div>
+        {/* <div data-aos="zoom-in" className="w-full lg:w-1/2 mt-20">
           <img
             src="/banner2.png"
             alt="Logo"
@@ -64,8 +75,8 @@ const Home = () => {
             alt="Logo"
             className="w-full h-auto object-cover block lg:hidden animate-bounceUpDown"
           />
-        </div>
-        <div className="w-full lg:w-1/2 mt-4 lg:mt-0 text-center lg:text-left">
+        </div> */}
+        {/* <div className="w-full lg:w-1/2 mt-4 lg:mt-0 text-center lg:text-left">
           <h1
             className="text-3xl font-bold mb-4"
             style={{
@@ -94,7 +105,7 @@ const Home = () => {
           >
             Start Learning
           </Button>
-        </div>
+        </div> */}
       </div>
       <FeaturesSection />
       <TestimonialsSection />

@@ -408,10 +408,10 @@ const AmazonCourse = () => {
       ) : (
         <div className="flex flex-col lg:flex-row h-screen">
           {/* Left Sidebar for Video List */}
-          <div className="lg:w-1/3 w-full lg:h-auto h-[50vh] overflow-y-auto border-r border-gray-300 p-4">
+          <div className="lg:w-1/3 w-full lg:h-[80vh] h-[50vh] overflow-y-auto border-r border-gray-300 p-4">
             <Title level={4}>Video List</Title>
 
-            {/* Beginner, Intermediate, Advanced Video Categories with Collapsable */}
+            {/* Beginner, Intermediate, Advanced Video Categories with Collapsible */}
             <Collapse defaultActiveKey={["1", "2", "3"]}>
               <Panel header="Beginner Videos" key="1">
                 {begginer.map((video) => (
