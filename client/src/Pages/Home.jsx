@@ -8,6 +8,9 @@ import FAQSection from "./Faq";
 import TestimonialsSection from "./Testimonial";
 import UserNavbar from "../Components/UserNavbar";
 import FeaturesSection from "../Components/Features";
+import CourseTemplate from "./CourseTemplate";
+import OnlineJourney from "../Components/OnlineJourney";
+import CustomerReview from "../Components/CustomerReview";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -41,30 +44,9 @@ const Home = () => {
     <div className="mt-8">
       {/* <Navbar /> */}
       <UserNavbar />
-      <div
-        className="flex flex-col lg:flex-row items-center justify-between mb-10"
-        style={{
-          backgroundImage: "url('/banner9.jpg')", // Background image URL
-          backgroundSize: "cover", // Cover the entire container
-          backgroundPosition: "center", // Center the image
-          backgroundRepeat: "no-repeat", // Prevent the image from repeating
-          height: "90vh", // Make the height fill the entire viewport height
-          width: "100%", // Make the width fill the entire viewport width
-          marginTop: "60px",
-        }}
-      >
-        <div className="relative top-32 left-6">
-          <Button
-            onClick={() => {
-              navigate("/login");
-            }}
-            className="font-bold"
-            type="primary"
-          >
-            Start Now
-          </Button>
-        </div>
-        {/* <div data-aos="zoom-in" className="w-full lg:w-1/2 mt-20">
+      <div className="flex flex-col lg:flex-row items-center justify-between mb-10">
+        <div className="relative top-32 left-6"></div>
+        <div data-aos="zoom-in" className="w-full lg:w-1/2 mt-20">
           <img
             src="/banner2.png"
             alt="Logo"
@@ -75,8 +57,8 @@ const Home = () => {
             alt="Logo"
             className="w-full h-auto object-cover block lg:hidden animate-bounceUpDown"
           />
-        </div> */}
-        {/* <div className="w-full lg:w-1/2 mt-4 lg:mt-0 text-center lg:text-left">
+        </div>
+        <div className="w-full lg:w-1/2 mt-4 lg:mt-0 text-center lg:text-left">
           <h1
             className="text-3xl font-bold mb-4"
             style={{
@@ -105,10 +87,19 @@ const Home = () => {
           >
             Start Learning
           </Button>
-        </div> */}
+          <Button
+            onClick={handleAppointmentClick}
+            type="primary"
+            className="bg-gradient-to-r ml-4 from-blue-800 to-blue-400 hover:from-blue-700 hover:to-blue-500 font-bold shadow-lg hover:shadow-xl my-4"
+          >
+            Enroll Now
+          </Button>
+        </div>
       </div>
+      <CourseTemplate />
       <FeaturesSection />
-      <TestimonialsSection />
+      <OnlineJourney />
+      <CustomerReview />
       <FAQSection />
 
       <Footer />
