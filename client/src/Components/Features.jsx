@@ -66,7 +66,7 @@ const Features = () => {
             dataSource={topics}
             renderItem={(item) => (
               <List.Item
-                className="cursor-pointer hover:bg-blue-50 flex items-center font-bold"
+                className="cursor-pointer m-7 hover:bg-blue-50 flex items-center font-bold"
                 onClick={() => handleTopicClick(item.videoLink)}
               >
                 <span className="mr-2">{item.icon}</span>

@@ -64,7 +64,6 @@ const CustomerReview = () => {
             allow="autoplay; encrypted-media"
             allowFullScreen
           ></iframe> */}
-              <p className="text-center mt-2 font-semibold">Products</p>
             </div>
 
             {/* Video 2 */}
@@ -78,9 +77,6 @@ const CustomerReview = () => {
                 height="200"
                 allow="autoplay; encrypted-media"
               />
-              <p className="text-center mt-2 font-semibold">
-                Account Creation and Listings
-              </p>
             </div>
 
             {/* Video 3 */}
@@ -94,7 +90,6 @@ const CustomerReview = () => {
                 height="200"
                 allow="autoplay; encrypted-media"
               />
-              <p className="text-center mt-2 font-semibold">Learnings</p>
             </div>
 
             {/* Video 4 */}
@@ -108,7 +103,6 @@ const CustomerReview = () => {
                 height="200"
                 allow="autoplay; encrypted-media"
               />
-              <p className="text-center mt-2 font-semibold">Support</p>
             </div>
 
             {/* Video 5 */}
@@ -122,7 +116,6 @@ const CustomerReview = () => {
                 height="200"
                 allow="autoplay; encrypted-media"
               />
-              <p className="text-center mt-2 font-semibold">Content</p>
             </div>
           </div>
 
