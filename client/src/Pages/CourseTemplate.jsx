@@ -62,7 +62,17 @@ const CourseTemplate = () => {
             >
               Login
             </Button>
-            <Button type="default" className="w-full md:w-auto">
+            <Button
+              onClick={() => {
+                const phoneNumber = "7300054369";
+                const message = encodeURIComponent(
+                  "Hi, I would like to chat about enrollment."
+                );
+                window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+              }}
+              type="default"
+              className="w-full md:w-auto"
+            >
               Enroll Now
             </Button>
           </div>
@@ -111,7 +121,17 @@ const CourseTemplate = () => {
             <Button type="primary" className="w-full md:w-auto">
               Login
             </Button>
-            <Button type="default" className="w-full md:w-auto">
+            <Button
+              onClick={() => {
+                const phoneNumber = "7300054369";
+                const message = encodeURIComponent(
+                  "Hi, I would like to chat about enrollment."
+                );
+                window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+              }}
+              type="default"
+              className="w-full md:w-auto"
+            >
               Enroll Now
             </Button>
           </div>

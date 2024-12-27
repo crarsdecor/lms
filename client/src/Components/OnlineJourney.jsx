@@ -98,7 +98,17 @@ const OnlineJourney = () => {
         <h1 className="text-2xl font-bold text-center mb-6 text-blue-500">
           ALL ELEMENTS ARE REQUIRED FOR GROWTH
         </h1>
-        <Button type="primary" size="large">
+        <Button
+          onClick={() => {
+            const phoneNumber = "7300054369";
+            const message = encodeURIComponent(
+              "Hi, I would like to chat about enrollment."
+            );
+            window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+          }}
+          type="primary"
+          className="w-full md:w-auto"
+        >
           Join Now
         </Button>
       </div>

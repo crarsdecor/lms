@@ -88,7 +88,13 @@ const Home = () => {
             Start Learning
           </Button>
           <Button
-            onClick={handleAppointmentClick}
+            onClick={() => {
+              const phoneNumber = "7300054369";
+              const message = encodeURIComponent(
+                "Hi, I would like to chat about enrollment."
+              );
+              window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+            }}
             type="primary"
             className="bg-gradient-to-r ml-4 from-blue-800 to-blue-400 hover:from-blue-700 hover:to-blue-500 font-bold shadow-lg hover:shadow-xl my-4"
           >
