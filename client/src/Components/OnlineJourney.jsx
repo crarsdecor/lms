@@ -5,12 +5,13 @@ const OnlineJourney = () => {
   return (
     <div className="p-4">
       {/* Title */}
-      <h1 className="text-3xl font-bold text-center mb-6 text-blue-500">
-        Online Journey
-      </h1>
-
+      <div className="w-full mb-8 mx-auto pb-2 px-4 bg-gradient-to-r mb-3 from-blue-500 to-red-300 shadow-lg rounded-lg">
+        <h1 className="text-2xl text-center p-4 font-bold text-white">
+          Online Journey
+        </h1>
+      </div>{" "}
       {/* Video Container */}
-      <div className="flex space-x-4 overflow-x-auto pb-4">
+      <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
         {/* Video 1 */}
         <div className="flex-none w-64">
           <iframe
@@ -92,7 +93,6 @@ const OnlineJourney = () => {
           <p className="text-center mt-2 font-semibold">Content</p>
         </div>
       </div>
-
       {/* Join Now Button */}
       <div className="text-center mt-6">
         <h1 className="text-2xl font-bold text-center mb-6 text-blue-500">

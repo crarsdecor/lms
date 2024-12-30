@@ -5,9 +5,13 @@ import { Button } from "antd";
 const CustomerReview = () => {
   return (
     <>
-      <h1 className="text-3xl font-bold text-center mb-6 mt-16 text-blue-500">
-        What Our Customer Says
-      </h1>
+      <div className="p-4 mt-28">
+        <div className="w-full mx-auto pb-2 px-4 bg-gradient-to-r mb-3 from-blue-500 to-red-300 shadow-lg rounded-lg">
+          <h1 className="text-2xl text-center p-4 font-bold text-white">
+            What Our Customer Says
+          </h1>
+        </div>{" "}
+      </div>
       <div className="container mx-auto p-4">
         {/* First Section: Split into two halves */}
         <div className="lg:flex items-center space-x-8">
@@ -43,7 +47,7 @@ const CustomerReview = () => {
         {/* Second Section: Videos */}
         <div className="p-4">
           {/* Video Container */}
-          <div className="flex space-x-4 overflow-x-auto pb-4">
+          <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
             {/* Video 1 */}
             <div className="flex-none w-64">
               <iframe

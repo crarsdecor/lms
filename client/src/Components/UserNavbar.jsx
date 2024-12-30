@@ -107,7 +107,7 @@ const UserNavbar = () => {
                 onClick={() => navigate("/testimonials")}
                 className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"
               >
-                Testimonials
+                How We Work
               </button>
             )}
           </li>
@@ -124,7 +124,7 @@ const UserNavbar = () => {
                 onClick={() => navigate("/aboutus")}
                 className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"
               >
-                About Us
+                Artists
               </button>
             )}
           </li>
@@ -138,10 +138,12 @@ const UserNavbar = () => {
               </button>
             ) : (
               <button
-                onClick={() => navigate("/contactus")}
+                onClick={() =>
+                  window.open("https://saumiccraft.com/", "_blank")
+                }
                 className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"
               >
-                Contact Us
+                Saumic Craft
               </button>
             )}
           </li>
@@ -152,6 +154,18 @@ const UserNavbar = () => {
                 className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"
               >
                 Live Training
+              </button>
+            ) : (
+              <button className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"></button>
+            )}
+          </li>
+          <li>
+            {token ? (
+              <button
+                onClick={() => navigate("/imfw")}
+                className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"
+              >
+                IMFW
               </button>
             ) : (
               <button className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"></button>

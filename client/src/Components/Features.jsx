@@ -55,14 +55,17 @@ const Features = () => {
 
   return (
     <>
-      <h1 className="text-3xl mt-24 font-extrabold mb-4 text-center text-blue-500">
-        Why Choose Us
-      </h1>
+      <div className="p-4">
+        <div className="w-full mx-auto pb-2 px-4 bg-gradient-to-r mb-3 from-blue-500 to-red-300 shadow-lg rounded-lg">
+          <h1 className="text-2xl text-center p-4 font-bold text-white">
+            Why Choose Us
+          </h1>
+        </div>{" "}
+      </div>
       <div className="flex flex-col md:flex-row h-[80vh]">
         {/* Left Side */}
         <div className="w-full md:w-1/3 mt-4 p-4" data-aos="fade-up">
           <List
-            bordered
             dataSource={topics}
             renderItem={(item) => (
               <List.Item

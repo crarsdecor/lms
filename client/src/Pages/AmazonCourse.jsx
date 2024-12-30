@@ -409,12 +409,14 @@ const AmazonCourse = () => {
         <div className="flex flex-col lg:flex-row h-screen">
           {/* Left Sidebar for Video List */}
           <div className="lg:w-1/3 w-full lg:h-[80vh] h-[50vh] overflow-y-auto border-r border-gray-300 p-4">
-            <Title level={4}>Video List</Title>
+            <Title level={4} className="font-bold">
+              Course Videos
+            </Title>
 
             {/* Beginner, Intermediate, Advanced Video Categories with Collapsible */}
             <Collapse defaultActiveKey={["1", "2", "3"]}>
               <Panel header="Beginner Videos" key="1">
-                {begginer.map((video) => (
+                {begginer.map((video, index) => (
                   <Card
                     key={video._id}
                     style={{
@@ -427,6 +429,10 @@ const AmazonCourse = () => {
                     onClick={() => handleSelectVideo(video)}
                   >
                     <Text>
+                      <span>
+                        {" "}
+                        {index + 1}. {/* Serial number */}
+                      </span>
                       {video.title}{" "}
                       {isVideoCompleted(video) && (
                         <span style={{ color: "green", marginLeft: "8px" }}>
@@ -439,14 +445,23 @@ const AmazonCourse = () => {
               </Panel>
 
               <Panel header="Intermediate Videos" key="2">
-                {intermediate.map((video) => (
+                {intermediate.map((video, index) => (
                   <Card
                     key={video._id}
-                    className="mb-4"
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer", // Pointer cursor on hover
+                      height: "50px", // Fixed height of 50px
+                      padding: "0 16px", // Horizontal padding, no vertical padding
+                      display: "flex", // Flexbox for layout
+                      alignItems: "center", // Vertically center content
+                    }}
                     onClick={() => handleSelectVideo(video)}
                   >
                     <Text>
+                      <span>
+                        {" "}
+                        {index + 1}. {/* Serial number */}
+                      </span>
                       {video.title}{" "}
                       {isVideoCompleted(video) && (
                         <span style={{ color: "green", marginLeft: "8px" }}>
@@ -459,14 +474,22 @@ const AmazonCourse = () => {
               </Panel>
 
               <Panel header="Advanced Videos" key="3">
-                {advance.map((video) => (
+                {advance.map((video, index) => (
                   <Card
                     key={video._id}
-                    className="mb-4"
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer", // Pointer cursor on hover
+                      height: "50px", // Fixed height of 50px
+                      padding: "0 16px", // Horizontal padding, no vertical padding
+                      display: "flex", // Flexbox for layout
+                      alignItems: "center", // Vertically center content
+                    }}
                     onClick={() => handleSelectVideo(video)}
                   >
                     <Text>
+                      <span style={{ marginRight: "8px" }}>
+                        {index + 1}. {/* Serial number */}
+                      </span>
                       {video.title}{" "}
                       {isVideoCompleted(video) && (
                         <span style={{ color: "green", marginLeft: "8px" }}>
@@ -485,6 +508,19 @@ const AmazonCourse = () => {
             {/* Mark Complete Button */}
             {selectedVideo && (
               <div className="flex justify-end space-x-4 pt-4 sm:pt-0">
+                {amazon && amazon.length > 0 ? (
+                  amazon.map((course) => (
+                    <div className="w-full px-4">
+                      <Text>Course Progress:</Text>
+                      <Progress
+                        percent={calculateAmazonProgress(course)}
+                        status="active"
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <Text type="secondary">No courses available.</Text>
+                )}
                 <Button
                   type="primary"
                   onClick={() => markVideoComplete(selectedVideo._id)}

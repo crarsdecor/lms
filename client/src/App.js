@@ -21,6 +21,7 @@ import SevFivTraining from "./Pages/SevFivTraining";
 import LiveTraining from "./Pages/LiveTraining";
 import LiveTraningAdmin from "./Pages/LiveTraningAdmin";
 import VideoPlayerPage from "./Pages/VideoPlayerPage";
+import Imfw from "./Pages/Imfw";
 function App() {
   return (
     <>
@@ -46,6 +47,7 @@ function App() {
               element={<SocialMediaContent />}
             />
             <Route path="/video-player" element={<VideoPlayerPage />} />
+            <Route path="/imfw" element={<Imfw />} />
           </Route>
           <Route element={<AdminPrivateRoute />}>
             <Route path="/admindash" element={<AdminDash />} />

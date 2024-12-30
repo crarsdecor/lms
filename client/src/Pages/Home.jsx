@@ -44,7 +44,7 @@ const Home = () => {
     <div className="mt-8">
       {/* <Navbar /> */}
       <UserNavbar />
-      <div className="flex flex-col lg:flex-row items-center justify-between mb-10">
+      <div className="flex flex-col lg:flex-row items-center justify-between mb-16">
         <div className="relative top-32 left-6"></div>
         <div data-aos="zoom-in" className="w-full lg:w-1/2 mt-20">
           <img
