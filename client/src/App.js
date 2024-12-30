@@ -22,6 +22,8 @@ import LiveTraining from "./Pages/LiveTraining";
 import LiveTraningAdmin from "./Pages/LiveTraningAdmin";
 import VideoPlayerPage from "./Pages/VideoPlayerPage";
 import Imfw from "./Pages/Imfw";
+import Artists from "./Pages/Artists";
+import HowWeWork from "./Pages/HowWeWork";
 function App() {
   return (
     <>
@@ -31,7 +33,9 @@ function App() {
           <Route path="/login" exact element={<LogIn />} />
           <Route path="/testimonials" exact element={<Testimonial />} />
           <Route path="/aboutus" exact element={<AboutUs />} />
+          <Route path="/artists" exact element={<Artists />} />
           <Route path="/contactus" exact element={<ContactUs />} />
+          <Route path="/how-we-work" exact element={<HowWeWork />} />
 
           <Route element={<UserPrivateRoute />}>
             <Route path="/userdash" exact element={<UserDash />} />

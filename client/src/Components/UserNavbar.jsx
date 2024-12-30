@@ -104,7 +104,7 @@ const UserNavbar = () => {
               </button>
             ) : (
               <button
-                onClick={() => navigate("/testimonials")}
+                onClick={() => navigate("/how-we-work")}
                 className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"
               >
                 How We Work
@@ -121,7 +121,7 @@ const UserNavbar = () => {
               </button>
             ) : (
               <button
-                onClick={() => navigate("/aboutus")}
+                onClick={() => navigate("/artists")}
                 className="text-gray-800 hover:text-blue-600 whitespace-nowrap transition-colors"
               >
                 Artists
